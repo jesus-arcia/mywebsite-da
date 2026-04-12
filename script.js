@@ -96,42 +96,29 @@ document.addEventListener('DOMContentLoaded', () => {
             // Recolectar checkboxes múltiples (servicios)
             data.services = formData.getAll('service');
 
-            // --- INTEGRACION CON N8N WEBHOOK (Fase de Pruebas) ---
-            try {
-                // Hacemos el envío de los datos en formato JSON a tu cuenta de N8N
-                const response = await fetch(WEBHOOK_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                });
+            // --- INTEGRACIÓN DIRECTA A WHATSAPP (Trigger para Evolution API) ---
+            const numeroDestino = '5491173587842'; 
+            
+            const serviciosTxt = data.services.length > 0 ? data.services.join(', ') : 'No especificado aún';
+            
+            // Construimos la estructura precisa que el bot de N8N leerá al recibir el mensaje
+            const mensajeWA = `🦅 *NUEVO LEAD - RAVEN INTELLIGENCE* 🦅\n\n` +
+                              `*Nombre:* ${data.name}\n` +
+                              `*Teléfono:* ${data.whatsapp}\n` +
+                              `*Email:* ${data.email}\n` +
+                              `*Ubicación:* ${data.location}\n` +
+                              `*Referencia:* ${data.source}\n\n` +
+                              `*Servicios de interés:*\n- ${serviciosTxt.replace(/,/g, '\n- ')}\n\n` +
+                              `*Mensaje Adicional:*\n${data.message || 'Sin mensaje'}`;
+            
+            // Codificar texto para la URL
+            const urlWhatsApp = `https://wa.me/${numeroDestino}?text=${encodeURIComponent(mensajeWA)}`;
+            
+            // Redirigir al cliente a su WhatsApp
+            window.open(urlWhatsApp, '_blank');
 
-                if (!response.ok) {
-                    throw new Error('Fallo en la recepción del Webhook N8N');
-                }
-
-                // Éxito con Webhook: Mostrar el check
-                mostrarExito();
-
-            } catch (error) {
-                console.warn('Webhook apagado o expirado. Usando WhatsApp como Fallback.', error);
-                
-                // FALLBACK DE SEGURIDAD: Si la PC está apagada o expiró N8N,
-                // no perdemos el cliente. Lo mandamos directo por WhatsApp de igual manera.
-                const numeroDestino = '5491173587842'; 
-                const serviciosTxt = data.services.length > 0 ? data.services.join(', ') : 'No especificado aún';
-                
-                const mensajeWA = `🦅 *NUEVO LEAD (Respaldo) - RAVEN* 🦅\n\n` +
-                                  `*Nombre:* ${data.name}\n` +
-                                  `*Teléfono:* ${data.whatsapp}\n` +
-                                  `*Email:* ${data.email}\n` +
-                                  `*Servicios:* ${serviciosTxt}\n` +
-                                  `*Mensaje:* ${data.message || 'Sin mensaje'}`;
-                
-                const urlWhatsApp = `https://wa.me/${numeroDestino}?text=${encodeURIComponent(mensajeWA)}`;
-                window.open(urlWhatsApp, '_blank');
-                
-                mostrarExito();
-            }
+            // Mostrar estado de éxito en el formulario
+            mostrarExito();
 
             function mostrarExito() {
                 // Restaurar botón y ocultar form visualmente o solo mostrar el mensaje
