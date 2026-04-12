@@ -96,45 +96,31 @@ document.addEventListener('DOMContentLoaded', () => {
             // Recolectar checkboxes múltiples (servicios)
             data.services = formData.getAll('service');
 
-            try {
-                // Intento 1: Enviar al Webhook de N8N
-                const response = await fetch(WEBHOOK_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(data)
-                });
+            // --- INTEGRACIÓN DIRECTA A WHATSAPP BUSINESS ---
+            // Número de WhatsApp de destino (sin el + y sin espacios)
+            const numeroDestino = '5491173587842'; 
+            
+            const serviciosTxt = data.services.length > 0 ? data.services.join(', ') : 'No especificado aún';
+            
+            // Construir el mensaje de WhatsApp que llegará estructurado
+            const mensajeWA = `🦅 *NUEVO LEAD - RAVEN INTELLIGENCE* 🦅\n\n` +
+                              `*Nombre:* ${data.name}\n` +
+                              `*Teléfono:* ${data.whatsapp}\n` +
+                              `*Email:* ${data.email}\n` +
+                              `*Ubicación:* ${data.location}\n` +
+                              `*Referencia:* ${data.source}\n\n` +
+                              `*Servicios de interés:*\n- ${serviciosTxt.replace(/,/g, '\n- ')}\n\n` +
+                              `*Mensaje Adicional:*\n${data.message || 'Sin mensaje'}`;
+            
+            // Codificar texto para URL
+            const mensajeCodificado = encodeURIComponent(mensajeWA);
+            const urlWhatsApp = `https://wa.me/${numeroDestino}?text=${mensajeCodificado}`;
+            
+            // Abrir WhatsApp en una nueva pestaña (o app directo en celulares)
+            window.open(urlWhatsApp, '_blank');
 
-                if (!response.ok) {
-                    throw new Error('Fallback al mailto');
-                }
-
-                // Éxito con Webhook
-                mostrarExito();
-
-            } catch (error) {
-                console.warn('Webhook no configurado o falló. Usando fallback por mailto.', error);
-                
-                // Fallback: Armar el body del mailto y abrir cliente de correo
-                const serviciosTxt = data.services.length > 0 ? data.services.join(', ') : 'No especificado';
-                const bodyTxt = `Nuevo lead desde RAVEN INTELLIGENCE:%0D%0A%0D%0A` +
-                                `Nombre: ${data.name}%0D%0A` +
-                                `WhatsApp: ${data.whatsapp}%0D%0A` +
-                                `Email: ${data.email}%0D%0A` +
-                                `Ubicación: ${data.location}%0D%0A` +
-                                `Fuente: ${data.source}%0D%0A` +
-                                `Servicios de interés: ${serviciosTxt}%0D%0A` +
-                                `Mensaje: ${data.message || 'Sin mensaje adicional'}`;
-                
-                const mailtoURL = `mailto:dataanalystja@gmail.com?subject=Nuevo Lead Web: ${data.name}&body=${bodyTxt}`;
-                
-                // Abrir el cliente de correo
-                window.location.href = mailtoURL;
-
-                // Mostrar éxito visualmente asumiendo que el usuario envió el mail
-                mostrarExito();
-            }
+            // Mostrar estado de éxito en el formulario
+            mostrarExito();
 
             function mostrarExito() {
                 // Restaurar botón y ocultar form visualmente o solo mostrar el mensaje
