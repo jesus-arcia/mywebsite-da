@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAVEN INTELLIGENCE — Links</title>
+    <meta name="description" content="Conecta con Raven Intelligence — Data Analytics, BI y AI Automation.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0c;
+            --neon: #ccff00;
+            --text: #f8f9fa;
+            --muted: #7a7c85;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: var(--bg);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Inter', sans-serif;
+            padding: 40px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        /* Glow de fondo */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -200px; left: 50%;
+            transform: translateX(-50%);
+            width: 800px; height: 800px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(204,255,0,0.12) 0%, transparent 65%);
+            pointer-events: none;
+        }
+        .container {
+            width: 100%;
+            max-width: 480px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 32px;
+            position: relative;
+            z-index: 10;
+        }
+        /* Encabezado / Logo */
+        .header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            text-align: center;
+        }
+        .logo {
+            width: 200px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 16px rgba(204,255,0,0.3));
+        }
+        .header-name {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 26px;
+            font-weight: 800;
+            letter-spacing: 3px;
+        }
+        .header-name .r { color: #c8cad0; }
+        .header-name .i { color: var(--neon); }
+        .header-role {
+            color: var(--muted);
+            font-size: 13px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        /* Links */
+        .links-list {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .link-btn {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            padding: 18px 24px;
+            border-radius: 16px;
+            text-decoration: none;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 600;
+            font-size: 16px;
+            border: 1.5px solid rgba(255,255,255,0.07);
+            background: rgba(255,255,255,0.03);
+            color: var(--text);
+            transition: all 0.25s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .link-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(204,255,0,0.06), transparent);
+            opacity: 0;
+            transition: opacity 0.25s;
+        }
+        .link-btn:hover::before { opacity: 1; }
+        .link-btn:hover {
+            border-color: rgba(204,255,0,0.35);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+        }
+        .link-btn .btn-icon {
+            width: 44px; height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            flex-shrink: 0;
+        }
+        /* Colores únicos por botón */
+        .btn-web .btn-icon   { background: rgba(204,255,0,0.12); }
+        .btn-wa .btn-icon    { background: rgba(37,211,102,0.12); }
+        .btn-li .btn-icon    { background: rgba(0,119,181,0.15); }
+        .btn-gh .btn-icon    { background: rgba(255,255,255,0.07); }
+
+        .btn-web:hover  { border-color: rgba(204,255,0,0.4); }
+        .btn-wa:hover   { border-color: rgba(37,211,102,0.4); }
+        .btn-li:hover   { border-color: rgba(0,119,181,0.4); }
+        .btn-gh:hover   { border-color: rgba(255,255,255,0.2); }
+
+        .btn-label { flex: 1; }
+        .btn-sub { display: block; font-size: 11px; color: var(--muted); font-weight: 400; margin-top: 3px; }
+        .arrow { color: var(--muted); font-size: 18px; }
+
+        /* Footer */
+        .footer-tag {
+            color: var(--muted);
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-align: center;
+        }
+        .footer-tag span { color: var(--neon); }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <div class="header">
+        <img src="images/logo_raven_white.png" alt="Raven Intelligence" class="logo">
+        <div class="header-name">
+            <span class="r">RAVEN </span><span class="i">INTELLIGENCE</span>
+        </div>
+        <div class="header-role">Data Analyst · Business Intelligence · AI Automation</div>
+    </div>
+
+    <div class="links-list">
+
+        <a href="https://unique-sunburst-2842b9.netlify.app/" target="_blank" class="link-btn btn-web">
+            <div class="btn-icon">🦅</div>
+            <div class="btn-label">
+                Web Oficial
+                <span class="btn-sub">Servicios, Proyectos y Consulta Gratuita</span>
+            </div>
+            <span class="arrow">›</span>
+        </a>
+
+        <a href="https://wa.me/5491173587842?text=Hola%20Jesús%2C%20vi%20tu%20tarjeta%20y%20quiero%20consultar%20sobre%20tus%20servicios" target="_blank" class="link-btn btn-wa">
+            <div class="btn-icon">💬</div>
+            <div class="btn-label">
+                WhatsApp Business
+                <span class="btn-sub">Respuesta en menos de 2 horas</span>
+            </div>
+            <span class="arrow">›</span>
+        </a>
+
+        <a href="https://www.linkedin.com/in/jesús-manuel-arcia-998890391" target="_blank" class="link-btn btn-li">
+            <div class="btn-icon">💼</div>
+            <div class="btn-label">
+                LinkedIn
+                <span class="btn-sub">Perfil profesional y trayectoria</span>
+            </div>
+            <span class="arrow">›</span>
+        </a>
+
+        <a href="https://github.com/jesus-arcia" target="_blank" class="link-btn btn-gh">
+            <div class="btn-icon">⚙️</div>
+            <div class="btn-label">
+                GitHub
+                <span class="btn-sub">Proyectos y repositorios</span>
+            </div>
+            <span class="arrow">›</span>
+        </a>
+
+    </div>
+
+    <div class="footer-tag">
+        🦅 <span>RAVEN INTELLIGENCE</span> — Transformamos datos en decisiones<br>
+        GABA Pilar, Buenos Aires, Argentina · 2026
+    </div>
+
+</div>
+</body>
+</html>
