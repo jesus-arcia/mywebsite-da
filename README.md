@@ -2,7 +2,7 @@
 
 Bienvenido al repositorio de la Landing Page oficial de **Raven Intelligence**, una página web modular, moderna y 100% responsiva diseñada para destacar servicios premium de analítica de datos, inteligencia de negocios y automatización con IA.
 
-Este README está diseñado para ayudarte a editar, mantener y escalar el código del sitio sin necesidad de conocimientos avanzados de programación.
+Este README file está diseñado para ayudarte a editar, mantener y escalar el código del sitio sin necesidad de conocimientos avanzados de programación.
 
 ---
 
