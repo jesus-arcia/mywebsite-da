@@ -3,157 +3,167 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Raven Intelligence - Tarjeta Digital</title>
+    <title>Raven Intelligence — Tarjeta Digital</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
-    <!-- Usamos qrcode-svg más limpio, genera un solo elemento -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style>
         :root {
-            --bg: #0a0a0c;
+            --bg:   #0a0a0c;
             --neon: #ccff00;
             --text: #f8f9fa;
-            --muted: #8b8d98;
+            --muted:#8b8d98;
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin:0; padding:0; box-sizing:border-box; }
 
         body {
-            background: #111;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            font-family: 'Inter', sans-serif;
+            background:#111;
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:flex-start;
+            font-family:'Inter',sans-serif;
         }
 
         /* ============================================================
-           TARJETA: 1080x1920 real. Se escala a 40% para previsualizar.
-           Para exportar a pantalla completa, quitar el transform.
+           CARD: 1080×1920 px reales
+           Escala de visualización: 40%
+           Para exportar → F12 → Ctrl+Shift+P → "Capture full size screenshot"
         ============================================================ */
         .card {
-            width: 1080px;
-            height: 1920px;
-            background: var(--bg);
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-            padding: 130px 100px 110px;
-            transform: scale(0.42);
-            transform-origin: top center;
+            width:1080px;
+            height:1920px;
+            background:var(--bg);
+            position:relative;
+            overflow:hidden;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            justify-content:center;
+            gap:90px;
+            padding:120px 100px;
+            transform:scale(0.42);
+            transform-origin:top center;
         }
 
-        /* --- Fondos decorativos --- */
+        /* ── Fondos ── */
         .grid {
-            position: absolute; inset: 0;
-            background-size: 90px 90px;
+            position:absolute; inset:0;
+            background-size:88px 88px;
             background-image:
-              linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
-            z-index: 0;
+              linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+              linear-gradient(90deg,rgba(255,255,255,.025) 1px, transparent 1px);
+            z-index:0;
+        }
+        .glow {
+            position:absolute; border-radius:50%; z-index:0;
         }
         .glow-a {
-            position: absolute;
-            width: 1300px; height: 1300px;
-            top: -600px; left: -150px;
-            background: radial-gradient(circle, rgba(204,255,0,0.16) 0%, transparent 60%);
-            border-radius: 50%; z-index: 0;
+            width:1400px; height:1400px;
+            top:-680px; left:-200px;
+            background:radial-gradient(circle, rgba(204,255,0,.18) 0%, transparent 60%);
         }
         .glow-b {
-            position: absolute;
-            width: 900px; height: 900px;
-            bottom: -400px; right: -150px;
-            background: radial-gradient(circle, rgba(204,255,0,0.08) 0%, transparent 60%);
-            border-radius: 50%; z-index: 0;
+            width:800px; height:800px;
+            bottom:-350px; right:-150px;
+            background:radial-gradient(circle, rgba(204,255,0,.09) 0%, transparent 60%);
         }
-        .side-line {
-            position: absolute; top: 280px; bottom: 280px; width: 2px;
-            background: linear-gradient(to bottom, transparent, var(--neon) 40%, transparent);
-            opacity: 0.35; z-index: 0;
+        .sideline {
+            position:absolute; top:200px; bottom:200px; width:2px; z-index:0;
+            background:linear-gradient(to bottom, transparent, var(--neon) 45%, transparent);
+            opacity:.3;
         }
-        .side-line.left  { left: 55px; }
-        .side-line.right { right: 55px; }
+        .sideline.l { left:58px; }
+        .sideline.r { right:58px; }
 
-        /* --- Zonas de contenido --- */
-        .z { position: relative; z-index: 10; width: 100%; display: flex; flex-direction: column; align-items: center; }
+        /* ── Zonas ── */
+        .z {
+            position:relative; z-index:10;
+            width:100%;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+        }
 
-        /* ZONA 1 — Logo oficial */
-        .logo-zone { gap: 36px; }
+        /* ── LOGO OFICIAL ── */
+        .logo-zone { gap:0; }
         .logo-img {
-            /* logo_raven_white.png: logo oficial blanco con fondo transparente */
-            width: 680px;
-            object-fit: contain;
-            filter: drop-shadow(0 0 28px rgba(204,255,0,0.28));
+            width:760px;          /* ancho generoso para que no se corte el texto */
+            object-fit:contain;
+            /* mix-blend-mode:screen → el negro del PNG desaparece sobre fondos dark */
+            mix-blend-mode:screen;
+            filter:drop-shadow(0 0 24px rgba(204,255,0,.22));
         }
 
-        /* ZONA 2 — Nombre y Rol */
-        .profile-zone { gap: 28px; text-align: center; }
-        .name {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 66px; font-weight: 800; letter-spacing: -1px;
-            color: var(--text);
-        }
-        .role {
-            font-size: 32px; letter-spacing: 5px; text-transform: uppercase;
-            color: var(--neon); font-weight: 500;
-        }
-        .pills { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; margin-top: 10px; }
-        .pill {
-            background: rgba(204,255,0,0.07);
-            border: 1px solid rgba(204,255,0,0.22);
-            color: var(--muted); font-size: 26px;
-            padding: 10px 32px; border-radius: 100px;
-        }
-
-        /* Divisor */
+        /* ── DIVISOR ── */
         .divider {
-            position: relative; z-index: 10;
-            width: 680px; height: 1.5px;
-            background: linear-gradient(to right, transparent, var(--neon) 50%, transparent);
-            opacity: 0.5;
+            position:relative; z-index:10;
+            width:700px; height:1.5px; flex-shrink:0;
+            background:linear-gradient(to right, transparent, var(--neon) 50%, transparent);
+            opacity:.5;
         }
 
-        /* ZONA 3 — QR */
+        /* ── PERFIL ── */
+        .profile-zone { gap:26px; text-align:center; }
+        .pname {
+            font-family:'Plus Jakarta Sans',sans-serif;
+            font-size:68px; font-weight:800; letter-spacing:-1px;
+            color:var(--text);
+        }
+        .prole {
+            font-size:31px; letter-spacing:5px; text-transform:uppercase;
+            color:var(--neon); font-weight:500;
+        }
+        .pills {
+            display:flex; gap:20px; flex-wrap:wrap;
+            justify-content:center; margin-top:8px;
+        }
+        .pill {
+            background:rgba(204,255,0,.07);
+            border:1px solid rgba(204,255,0,.22);
+            color:var(--muted); font-size:25px;
+            padding:10px 30px; border-radius:100px;
+        }
+
+        /* ── QR ── */
         .qr-zone {
-            gap: 38px;
-            background: rgba(255,255,255,0.025);
-            border: 1.5px solid rgba(204,255,0,0.22);
-            border-radius: 44px;
-            padding: 72px 88px 62px;
-            box-shadow: 0 0 60px rgba(0,0,0,0.5), inset 0 0 24px rgba(204,255,0,0.04);
+            gap:36px;
+            background:rgba(255,255,255,.025);
+            border:1.5px solid rgba(204,255,0,.22);
+            border-radius:44px;
+            padding:72px 96px 60px;
+            box-shadow:0 0 60px rgba(0,0,0,.5),
+                       inset 0 0 24px rgba(204,255,0,.04);
         }
-
-        /* Contenedor QR: forzamos que NO haya imagen duplicada */
         #qrcode {
-            background: #fff;
-            padding: 22px;
-            border-radius: 16px;
-            line-height: 0;   /* elimina espacio de inline */
+            background:#fff;
+            padding:20px;
+            border-radius:16px;
+            line-height:0;
+            /* El container fija el tamaño para que canvas e img no se dupliquen visualmente */
+            width:374px; height:374px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            overflow:hidden;
         }
-        /* El lib crea canvas. Ocultamos si también crea img para evitar duplicado */
-        #qrcode img  { display: none !important; }
-        #qrcode canvas { display: block; width: 360px !important; height: 360px !important; }
-
+        #qrcode canvas,
+        #qrcode img {
+            display:block;
+            width:334px !important;
+            height:334px !important;
+        }
         .qr-cta {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            color: var(--text); font-size: 40px; font-weight: 700;
-            text-align: center; letter-spacing: -0.5px;
+            font-family:'Plus Jakarta Sans',sans-serif;
+            color:var(--text); font-size:40px; font-weight:700;
+            text-align:center;
         }
-        .qr-hint { color: var(--muted); font-size: 26px; text-align: center; margin-top: -14px; }
-
-        /* ZONA 4 — Footer */
-        .footer-zone {
-            border-top: 1px solid rgba(255,255,255,0.07);
-            padding-top: 50px;
-            flex-direction: row;
-            justify-content: space-around;
-            gap: 0;
+        .qr-hint {
+            color:var(--muted); font-size:26px;
+            text-align:center; margin-top:-16px;
+            letter-spacing:1px;
         }
-        .ci { display: flex; align-items: center; gap: 14px; color: var(--muted); font-size: 27px; }
-        .ci-icon { color: var(--neon); font-size: 34px; }
     </style>
 </head>
 <body>
@@ -161,23 +171,23 @@
 <div class="card" id="card">
     <!-- Fondos -->
     <div class="grid"></div>
-    <div class="glow-a"></div>
-    <div class="glow-b"></div>
-    <div class="side-line left"></div>
-    <div class="side-line right"></div>
+    <div class="glow glow-a"></div>
+    <div class="glow glow-b"></div>
+    <div class="sideline l"></div>
+    <div class="sideline r"></div>
 
-    <!-- ZONA 1: Logo oficial (blanco transparente, sin encuadre) -->
+    <!-- ① LOGO OFICIAL (mezcla screen → elimina el negro del PNG) -->
     <div class="z logo-zone">
-        <img src="images/logo_raven_white.png" alt="RAVEN INTELLIGENCE" class="logo-img">
+        <img src="images/logo_raven_full.png" alt="RAVEN INTELLIGENCE" class="logo-img">
     </div>
 
     <!-- Divisor neón -->
     <div class="divider"></div>
 
-    <!-- ZONA 2: Nombre y perfil -->
+    <!-- ② PERFIL -->
     <div class="z profile-zone">
-        <div class="name">Ing. Jesús M. Arcia</div>
-        <div class="role">Data Analyst · AI Automation</div>
+        <div class="pname">Ing. Jesús M. Arcia</div>
+        <div class="prole">Data Analyst · AI Automation</div>
         <div class="pills">
             <span class="pill">Power BI</span>
             <span class="pill">Python</span>
@@ -186,32 +196,39 @@
         </div>
     </div>
 
-    <!-- ZONA 3: QR → apunta a la página Hub de Links -->
+    <!-- ③ QR → Hub de Links (Landing · WA · LinkedIn · GitHub) -->
     <div class="z qr-zone">
-        <!-- El QR abrirá la página links.html en Netlify con todos los accesos -->
         <div id="qrcode"></div>
         <div class="qr-cta">Escaneame · Conéctate</div>
         <div class="qr-hint">Landing · WhatsApp · LinkedIn · GitHub</div>
     </div>
 
-    <!-- ZONA 4: Contacto rápido -->
-    <div class="z footer-zone">
-        <div class="ci"><span class="ci-icon">📍</span> GABA Pilar, Argentina</div>
-        <div class="ci"><span class="ci-icon">📱</span> +54 9 11 7358 7842</div>
-        <div class="ci"><span class="ci-icon">✉️</span> dataanalystja@gmail.com</div>
-    </div>
 </div>
 
 <script>
-    // Apunta a la página Hub de Links (links.html en Netlify)
+    // Generamos el QR apuntando al Hub de Links
     new QRCode(document.getElementById("qrcode"), {
         text: "https://unique-sunburst-2842b9.netlify.app/links.html",
-        width: 360,
-        height: 360,
-        colorDark: "#0a0a0c",
+        width:  334,
+        height: 334,
+        colorDark:  "#0a0a0c",
         colorLight: "#ffffff",
         correctLevel: QRCode.CorrectLevel.H
     });
+
+    // Eliminamos el elemento duplicado que genera el plugin
+    // (genera canvas en Chrome y/o img en otros; a veces ambos)
+    setTimeout(function() {
+        var box   = document.getElementById("qrcode");
+        var canvas = box.querySelector("canvas");
+        var img    = box.querySelector("img");
+
+        if (canvas && img) {
+            // Ambos presentes → eliminamos la img, dejamos canvas
+            img.parentNode.removeChild(img);
+        }
+        // Si solo hay uno de los dos, ya está bien
+    }, 150);
 </script>
 </body>
 </html>
