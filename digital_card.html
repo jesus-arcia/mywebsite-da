@@ -7,13 +7,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style>
         :root {
             --bg:   #0a0a0c;
             --neon: #ccff00;
-            --text: #f8f9fa;
+            --text: #f0f1f5;
             --muted:#8b8d98;
+            --grey: #9da0a8;
         }
         * { margin:0; padding:0; box-sizing:border-box; }
 
@@ -27,9 +27,8 @@
         }
 
         /* ============================================================
-           CARD: 1080×1920 px reales
-           Escala de visualización: 40%
-           Para exportar → F12 → Ctrl+Shift+P → "Capture full size screenshot"
+           CARD 1080×1920 — escalada al 42% para previsualización
+           Para exportar: F12 > Ctrl+Shift+P > "Capture full size screenshot"
         ============================================================ */
         .card {
             width:1080px;
@@ -41,83 +40,100 @@
             flex-direction:column;
             align-items:center;
             justify-content:center;
-            gap:90px;
-            padding:120px 100px;
+            gap:80px;
+            padding:100px 110px;
             transform:scale(0.42);
             transform-origin:top center;
         }
 
-        /* ── Fondos ── */
+        /* FONDOS */
         .grid {
-            position:absolute; inset:0;
+            position:absolute; inset:0; z-index:0;
             background-size:88px 88px;
             background-image:
-              linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
-              linear-gradient(90deg,rgba(255,255,255,.025) 1px, transparent 1px);
-            z-index:0;
+              linear-gradient(rgba(255,255,255,.024) 1px, transparent 1px),
+              linear-gradient(90deg,rgba(255,255,255,.024) 1px,transparent 1px);
         }
         .glow {
-            position:absolute; border-radius:50%; z-index:0;
+            position:absolute; border-radius:50%; z-index:0; pointer-events:none;
         }
-        .glow-a {
-            width:1400px; height:1400px;
-            top:-680px; left:-200px;
-            background:radial-gradient(circle, rgba(204,255,0,.18) 0%, transparent 60%);
+        .ga {
+            width:1400px; height:1400px; top:-680px; left:-220px;
+            background:radial-gradient(circle,rgba(204,255,0,.18) 0%,transparent 60%);
         }
-        .glow-b {
-            width:800px; height:800px;
-            bottom:-350px; right:-150px;
-            background:radial-gradient(circle, rgba(204,255,0,.09) 0%, transparent 60%);
+        .gb {
+            width:800px; height:800px; bottom:-350px; right:-160px;
+            background:radial-gradient(circle,rgba(204,255,0,.09) 0%,transparent 60%);
         }
-        .sideline {
+        .vline {
             position:absolute; top:200px; bottom:200px; width:2px; z-index:0;
-            background:linear-gradient(to bottom, transparent, var(--neon) 45%, transparent);
-            opacity:.3;
+            background:linear-gradient(to bottom,transparent,rgba(204,255,0,.55) 45%,transparent);
         }
-        .sideline.l { left:58px; }
-        .sideline.r { right:58px; }
+        .vl { left:58px; } .vr { right:58px; }
 
-        /* ── Zonas ── */
-        .z {
-            position:relative; z-index:10;
-            width:100%;
+        /* ── UTILIDADES ── */
+        .z { position:relative; z-index:10; width:100%; display:flex; flex-direction:column; align-items:center; }
+
+        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━
+           ZONA 1 — LOGO OFICIAL
+        ━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+        .logo-zone {
+            flex-direction:row;
+            align-items:center;
+            justify-content:center;
+            gap:36px;
+        }
+        /* El SVG viene sin fondo negro → se ve limpio */
+        .raven-svg {
+            width:220px; height:220px;
+            object-fit:contain;
+            filter:drop-shadow(0 0 20px rgba(204,255,0,.35));
+            flex-shrink:0;
+        }
+        .brand-text {
             display:flex;
             flex-direction:column;
-            align-items:center;
+            line-height:1;
+        }
+        .brand-raven {
+            font-family:'Plus Jakarta Sans',sans-serif;
+            font-size:90px; font-weight:800;
+            letter-spacing:4px;
+            color:var(--grey);         /* gris igual que el logo */
+        }
+        .brand-intel {
+            font-family:'Plus Jakarta Sans',sans-serif;
+            font-size:74px; font-weight:800;
+            letter-spacing:4px;
+            color:var(--neon);         /* neon igual que el logo */
         }
 
-        /* ── LOGO OFICIAL ── */
-        .logo-zone { gap:0; }
-        .logo-img {
-            width:760px;          /* ancho generoso para que no se corte el texto */
-            object-fit:contain;
-            /* mix-blend-mode:screen → el negro del PNG desaparece sobre fondos dark */
-            mix-blend-mode:screen;
-            filter:drop-shadow(0 0 24px rgba(204,255,0,.22));
-        }
-
-        /* ── DIVISOR ── */
+        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━
+           DIVISOR
+        ━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
         .divider {
             position:relative; z-index:10;
-            width:700px; height:1.5px; flex-shrink:0;
-            background:linear-gradient(to right, transparent, var(--neon) 50%, transparent);
-            opacity:.5;
+            width:700px; height:1.5px;
+            background:linear-gradient(to right,transparent,var(--neon) 50%,transparent);
+            opacity:.5; flex-shrink:0;
         }
 
-        /* ── PERFIL ── */
+        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━
+           ZONA 2 — PERFIL
+        ━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
         .profile-zone { gap:26px; text-align:center; }
         .pname {
             font-family:'Plus Jakarta Sans',sans-serif;
-            font-size:68px; font-weight:800; letter-spacing:-1px;
+            font-size:66px; font-weight:800; letter-spacing:-1px;
             color:var(--text);
         }
         .prole {
-            font-size:31px; letter-spacing:5px; text-transform:uppercase;
+            font-size:30px; letter-spacing:5px; text-transform:uppercase;
             color:var(--neon); font-weight:500;
         }
         .pills {
-            display:flex; gap:20px; flex-wrap:wrap;
-            justify-content:center; margin-top:8px;
+            display:flex; gap:18px; flex-wrap:wrap;
+            justify-content:center; margin-top:10px;
         }
         .pill {
             background:rgba(204,255,0,.07);
@@ -126,33 +142,23 @@
             padding:10px 30px; border-radius:100px;
         }
 
-        /* ── QR ── */
+        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━
+           ZONA 3 — QR
+        ━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
         .qr-zone {
-            gap:36px;
+            gap:38px;
             background:rgba(255,255,255,.025);
             border:1.5px solid rgba(204,255,0,.22);
-            border-radius:44px;
-            padding:72px 96px 60px;
+            border-radius:48px;
+            padding:72px 96px 64px;
             box-shadow:0 0 60px rgba(0,0,0,.5),
-                       inset 0 0 24px rgba(204,255,0,.04);
+                       inset 0 0 28px rgba(204,255,0,.04);
         }
-        #qrcode {
-            background:#fff;
-            padding:20px;
-            border-radius:16px;
-            line-height:0;
-            /* El container fija el tamaño para que canvas e img no se dupliquen visualmente */
-            width:374px; height:374px;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            overflow:hidden;
-        }
-        #qrcode canvas,
-        #qrcode img {
+        /* QR generado por Google Charts API → imagen directa, sin JS, sin duplicados */
+        .qr-img {
+            width:360px; height:360px;
+            border-radius:18px;
             display:block;
-            width:334px !important;
-            height:334px !important;
         }
         .qr-cta {
             font-family:'Plus Jakarta Sans',sans-serif;
@@ -160,25 +166,51 @@
             text-align:center;
         }
         .qr-hint {
-            color:var(--muted); font-size:26px;
+            color:var(--muted); font-size:25px;
             text-align:center; margin-top:-16px;
             letter-spacing:1px;
         }
+
+        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━
+           ZONA 4 — LINK ALTERNATIVO
+        ━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+        .link-alt-zone { gap:20px; text-align:center; }
+        .link-alt-label {
+            color:var(--muted); font-size:26px; letter-spacing:1px;
+        }
+        .link-alt-btn {
+            display:inline-block;
+            text-decoration:none;
+            color:var(--bg);
+            background:var(--neon);
+            font-family:'Plus Jakarta Sans',sans-serif;
+            font-size:32px; font-weight:700;
+            padding:20px 60px;
+            border-radius:100px;
+            letter-spacing:1px;
+            box-shadow:0 0 30px rgba(204,255,0,.35);
+            transition:opacity .2s;
+        }
+        .link-alt-btn:hover { opacity:.88; }
     </style>
 </head>
 <body>
 
-<div class="card" id="card">
-    <!-- Fondos -->
+<div class="card">
+    <!-- Fondos decorativos -->
     <div class="grid"></div>
-    <div class="glow glow-a"></div>
-    <div class="glow glow-b"></div>
-    <div class="sideline l"></div>
-    <div class="sideline r"></div>
+    <div class="glow ga"></div>
+    <div class="glow gb"></div>
+    <div class="vline vl"></div>
+    <div class="vline vr"></div>
 
-    <!-- ① LOGO OFICIAL (mezcla screen → elimina el negro del PNG) -->
+    <!-- ① LOGO OFICIAL: cuervo SVG (transparente) + texto RAVEN / INTELLIGENCE en CSS -->
     <div class="z logo-zone">
-        <img src="images/logo_raven_full.png" alt="RAVEN INTELLIGENCE" class="logo-img">
+        <img src="images/logo_raven_vector.svg" alt="Raven" class="raven-svg">
+        <div class="brand-text">
+            <span class="brand-raven">RAVEN</span>
+            <span class="brand-intel">INTELLIGENCE</span>
+        </div>
     </div>
 
     <!-- Divisor neón -->
@@ -196,39 +228,28 @@
         </div>
     </div>
 
-    <!-- ③ QR → Hub de Links (Landing · WA · LinkedIn · GitHub) -->
+    <!-- ③ QR → Hub de Links generado por Google Charts (sin JS, siempre visible) -->
     <div class="z qr-zone">
-        <div id="qrcode"></div>
+        <img
+            src="https://chart.googleapis.com/chart?chs=360x360&cht=qr&chl=https%3A%2F%2Funique-sunburst-2842b9.netlify.app%2Flinks.html&choe=UTF-8&chld=H%7C2"
+            alt="QR — Raven Intelligence Links"
+            class="qr-img"
+        >
         <div class="qr-cta">Escaneame · Conéctate</div>
         <div class="qr-hint">Landing · WhatsApp · LinkedIn · GitHub</div>
     </div>
 
+    <!-- ④ LINK ALTERNATIVO DIGITAL (para compartir en digital sin escanear) -->
+    <div class="z link-alt-zone">
+        <span class="link-alt-label">O accedé directamente desde aquí</span>
+        <a href="https://unique-sunburst-2842b9.netlify.app/links.html"
+           target="_blank"
+           class="link-alt-btn">
+            🦅 &nbsp; ravenIntelligence.com/links
+        </a>
+    </div>
+
 </div>
 
-<script>
-    // Generamos el QR apuntando al Hub de Links
-    new QRCode(document.getElementById("qrcode"), {
-        text: "https://unique-sunburst-2842b9.netlify.app/links.html",
-        width:  334,
-        height: 334,
-        colorDark:  "#0a0a0c",
-        colorLight: "#ffffff",
-        correctLevel: QRCode.CorrectLevel.H
-    });
-
-    // Eliminamos el elemento duplicado que genera el plugin
-    // (genera canvas en Chrome y/o img en otros; a veces ambos)
-    setTimeout(function() {
-        var box   = document.getElementById("qrcode");
-        var canvas = box.querySelector("canvas");
-        var img    = box.querySelector("img");
-
-        if (canvas && img) {
-            // Ambos presentes → eliminamos la img, dejamos canvas
-            img.parentNode.removeChild(img);
-        }
-        // Si solo hay uno de los dos, ya está bien
-    }, 150);
-</script>
 </body>
 </html>
