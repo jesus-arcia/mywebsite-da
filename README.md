@@ -1,6 +1,6 @@
-# RAVEN INTELLIGENCE — Data Business
+# RAVEN INTELLIGENCE COMPANY — Data Business
 
-Bienvenido al repositorio de la Landing Page oficial de **Raven Intelligence**, una página web modular, moderna y 100% responsiva diseñada para destacar servicios premium de analítica de datos, inteligencia de negocios y automatización con IA.
+Bienvenido al repositorio de la Landing Page oficial de **Raven Intelligence Company**, una página web modular, moderna y 100% responsiva diseñada para destacar servicios premium de analítica de datos, inteligencia de negocios y automatización con IA.
 
 Este README file está diseñado para ayudarte a editar, mantener y escalar el código del sitio sin necesidad de conocimientos avanzados de programación.
 
@@ -9,7 +9,7 @@ Este README file está diseñado para ayudarte a editar, mantener y escalar el c
 ## 🏗️ Estructura del Proyecto
 
 ```text
-raven-intelligence/
+raven-intelligence-company/
 ├── index.html       # Estructura de la web, secciones y contenido.
 ├── styles.css       # Estilos visuales, modo oscuro, colores corporativos y animaciones.
 ├── script.js        # Lógica de interactividad y envío de formularios.

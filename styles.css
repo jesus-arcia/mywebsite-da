@@ -1,5 +1,5 @@
 /* ============================================================ */
-/* 🚀 RAVEN INTELLIGENCE — STYLESHEET                          */
+/* 🚀 RAVEN INTELLIGENCE COMPANY — STYLESHEET                   */
 /* ============================================================ */
 
 /* --- ROOT VARIABLES --- */
@@ -198,8 +198,14 @@ img {
 }
 
 .nav-logo {
-    height: 80px;
+    height: 110px;
     width: auto;
+    filter: drop-shadow(0 0 12px rgba(200, 230, 0, 0.4)); /* Resplandor neón */
+    transition: transform 0.3s ease;
+}
+
+.nav-logo:hover {
+    transform: scale(1.05);
 }
 
 .logo-text-fallback {
@@ -1086,8 +1092,10 @@ img {
 }
 
 .footer-logo {
-    height: 44px;
-    margin-bottom: 16px;
+    height: 100px;
+    width: auto;
+    margin-bottom: 1.5rem;
+    filter: drop-shadow(0 0 10px rgba(200, 230, 0, 0.3));
 }
 
 .footer-tagline {

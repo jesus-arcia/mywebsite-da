@@ -1,6 +1,6 @@
 <svg width="600" height="150" viewBox="0 0 600 150" xmlns="http://www.w3.org/2000/svg">
   <!-- ========================================== -->
-  <!-- RAVEN INTELLIGENCE VECTOR LOGO             -->
+  <!-- RAVEN INTELLIGENCE COMPANY VECTOR LOGO     -->
   <!-- ========================================== -->
 
   <!-- RAVEN GEOMETRIC HEAD -->
@@ -40,7 +40,7 @@
   <g font-family="'Inter', 'Helvetica Neue', sans-serif">
     <!-- Main Title -->
     <text x="180" y="75" font-size="52" font-weight="900" fill="#FFFFFF" letter-spacing="-1">RAVEN</text>
-    <text x="360" y="75" font-size="52" font-weight="800" fill="#C8E600" letter-spacing="-1">INTELLIGENCE</text>
+    <text x="360" y="75" font-size="42" font-weight="800" fill="#C8E600" letter-spacing="-1">INTELLIGENCE COMPANY</text>
     
     <!-- Subtitle -->
     <text x="185" y="115" font-size="28" font-weight="700" fill="#C8E600" letter-spacing="1">DATA</text>

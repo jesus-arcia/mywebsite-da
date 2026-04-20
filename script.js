@@ -1,5 +1,5 @@
 /* ============================================================ */
-/* 🚀 RAVEN INTELLIGENCE — SCRIPTS                             */
+/* 🚀 RAVEN INTELLIGENCE COMPANY — SCRIPTS                      */
 /* ============================================================ */
 
 // ------------------------------------------------------------------
@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const serviciosTxt = data.services.length > 0 ? data.services.join(', ') : 'No especificado aún';
             
             // Construimos la estructura precisa que el bot de N8N leerá al recibir el mensaje
-            const mensajeWA = `🦅 *NUEVO LEAD - RAVEN INTELLIGENCE* 🦅\n\n` +
+            const mensajeWA = `🦅 *NUEVO LEAD - RAVEN INTELLIGENCE COMPANY* 🦅\n\n` +
                               `*Nombre:* ${data.name}\n` +
                               `*Teléfono:* ${data.whatsapp}\n` +
                               `*Email:* ${data.email}\n` +
