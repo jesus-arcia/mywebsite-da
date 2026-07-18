@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>One Pager — Raven Intelligence Company</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
+
+        :root {
+            --bg-color: #0b0c10;
+            --secondary-bg: #1f2833;
+            --text-primary: #ffffff;
+            --text-secondary: #c5c6c7;
+            --accent-neon: #c8e600;
+            --accent-glow: rgba(200, 230, 0, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.5;
+            -webkit-print-color-adjust: exact;
+        }
+
+        /* A4 Page Formatting */
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+            padding: 20mm;
+            margin: 0 auto;
+            background-color: var(--bg-color);
+            border: 1px solid #333;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @media print {
+            .page {
+                margin: 0;
+                border: none;
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        /* Decorative Elements */
+        .page::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            z-index: 0;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--accent-neon);
+            padding-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo-box {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-img {
+            height: 70px;
+            filter: drop-shadow(0 0 10px var(--accent-glow));
+        }
+
+        .brand-name h1 {
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .brand-name p {
+            color: var(--accent-neon);
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .header-meta {
+            text-align: right;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        /* Layout Grid */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1.6fr 1fr;
+            gap: 25px;
+            position: relative;
+            z-index: 1;
+        }
+
+        section {
+            margin-bottom: 25px;
+        }
+
+        h2 {
+            font-size: 17px;
+            color: var(--accent-neon);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h2::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(to right, var(--accent-neon), transparent);
+        }
+
+        p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        /* Solution Items */
+        .solution-item {
+            background: var(--secondary-bg);
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            border-left: 3px solid var(--accent-neon);
+        }
+
+        .solution-item h3 {
+            font-size: 14px;
+            margin-bottom: 3px;
+        }
+
+        /* Project List */
+        .project-item {
+            margin-bottom: 15px;
+        }
+
+        .project-item h3 {
+            font-size: 14px;
+            color: var(--text-primary);
+        }
+
+        .project-item .tag {
+            font-size: 9px;
+            background: var(--accent-neon);
+            color: black;
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-weight: 800;
+            margin-right: 5px;
+            vertical-align: middle;
+        }
+
+        .project-item .result {
+            font-size: 13px;
+            color: var(--accent-neon);
+            font-weight: 600;
+            margin-top: 2px;
+        }
+
+        /* Sidebar info */
+        .sidebar {
+            background-color: var(--secondary-bg);
+            padding: 20px;
+            border-radius: 12px;
+            height: fit-content;
+        }
+
+        .tech-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .tech-tag {
+            font-size: 11px;
+            border: 1px solid #444;
+            padding: 4px 8px;
+            border-radius: 20px;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            font-size: 11px;
+            color: var(--text-secondary);
+        }
+
+        .contact-info div {
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-info strong {
+            color: var(--accent-neon);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page">
+        <header>
+            <div class="logo-box">
+                <img src="images/logo_raven_premium.png" alt="Logo" class="logo-img">
+                <div class="brand-name">
+                    <h1>RAVEN INTELLIGENCE COMPANY</h1>
+                    <p>Advanced Solutions & Data Analytics</p>
+                </div>
+            </div>
+            <div class="header-meta">
+                <strong>Soluciones Tecnológicas</strong><br>
+                Fundada en 2026<br>
+                Pilar, Buenos Aires
+            </div>
+        </header>
+
+        <div class="content-grid">
+            <div class="main-content">
+                <section>
+                    <h2>Misión Estratégica</h2>
+                    <p>Raven Intelligence Company potencia el crecimiento de organizaciones mediante el uso avanzado de Inteligencia Artificial y Ciencia de Datos. Optimizamos la toma de decisiones y automatizamos flujos de trabajo críticos para maximizar la eficiencia y rentabilidad.</p>
+                </section>
+
+                <section>
+                    <h2>Soluciones de Valor</h2>
+                    <div class="solution-item">
+                        <h3>Business Intelligence (BI) de Alto Nivel</h3>
+                        <p style="margin-bottom: 0; font-size: 13px;">Dashboards interactivos para visualización de KPIs críticos en tiempo real, transformando datos en planes de acción inmediatos.</p>
+                    </div>
+                    <div class="solution-item">
+                        <h3>Automatización con IA (N8N)</h3>
+                        <p style="margin-bottom: 0; font-size: 13px;">Sistemas que integran herramientas digitales para automatizar consultas, ventas y procesos administrativos complejos sin intervención humana.</p>
+                    </div>
+                    <div class="solution-item">
+                        <h3>Consultoría de Transformación Digital</h3>
+                        <p style="margin-bottom: 0; font-size: 13px;">Asesoramiento integral para la modernización de infraestructuras de datos y digitalización de activos comerciales.</p>
+                    </div>
+                </section>
+
+                <section>
+                    <h2>Proyectos de Impacto</h2>
+                    <div class="project-item">
+                        <h3><span class="tag">DATA SCIENCE</span> Dashboard Rendimiento: Aragua</h3>
+                        <p style="margin-bottom: 4px; font-size: 13px;">Sistema analítico para el Instituto de Deporte del Estado Aragua.</p>
+                        <div class="result">Impacto: Top 10 Nacional 2024 (7° lugar entre 24 estados).</div>
+                    </div>
+                    <div class="project-item">
+                        <h3><span class="tag">DATA ANALYTICS</span> Proyecto Final Coderhouse</h3>
+                        <p style="margin-bottom: 4px; font-size: 13px;">Análisis integral de grandes volúmenes de datos con enfoque en proyecciones estratégicas.</p>
+                        <div class="result">Reconocimiento: Top 10 del Programa General.</div>
+                    </div>
+                    <div class="project-item">
+                        <h3><span class="tag">IA AUTOMATION</span> Especialización Coderhouse</h3>
+                        <p style="margin-bottom: 4px; font-size: 13px;">Certificación avanzada en diseño e implementación de flujos automatizados complejos con IA.</p>
+                        <div class="result">Finalizado: Mayo 2026.</div>
+                    </div>
+                    <div class="project-item">
+                        <h3><span class="tag">IA</span> MotoStore Aragua: AI Automation</h3>
+                        <p style="margin-bottom: 4px; font-size: 13px;">Implementación de asistentes inteligentes para automatización de la atención comercial.</p>
+                    </div>
+                    <div class="project-item" style="margin-bottom: 0;">
+                        <h3><span class="tag">LOGÍSTICA</span> Transformación Digital: Del-Boccio</h3>
+                        <p style="margin-bottom: 4px; font-size: 13px;">Catálogo digital interactivo y optimización de ventas para importadora.</p>
+                    </div>
+                </section>
+            </div>
+
+            <aside class="sidebar">
+                <section>
+                    <h2 style="font-size: 15px;">Stack Tecnológico</h2>
+                    <div class="tech-list">
+                        <span class="tech-tag">Python (Pandas/NumPy)</span>
+                        <span class="tech-tag">Power BI</span>
+                        <span class="tech-tag">N8N Workflows</span>
+                        <span class="tech-tag">OpenAI APIs</span>
+                        <span class="tech-tag">SQL & Big Data</span>
+                        <span class="tech-tag">JavaScript / HTML</span>
+                    </div>
+                </section>
+
+                <section style="margin-top: 30px;">
+                    <h2 style="font-size: 15px;">¿Por qué Raven?</h2>
+                    <p style="font-size: 13px;">Ofrecemos la agilidad de una startup tecnológica con el rigor analítico de un entorno corporativo. <strong>No entregamos informes, entregamos activos digitales que impulsan el negocio.</strong></p>
+                </section>
+
+                <section style="margin-top: 30px;">
+                    <h2 style="font-size: 15px;">Servicios Clave</h2>
+                    <ul style="font-size: 12px; color: var(--text-secondary); list-style-type: square; margin-left: 15px;">
+                        <li>Análisis Predictivo</li>
+                        <li>Automatización WhatsApp API</li>
+                        <li>Gestión de Inventario Digital</li>
+                        <li>Monitoreo de KPIs en vivo</li>
+                    </ul>
+                </section>
+            </aside>
+        </div>
+
+        <footer>
+            <div class="contact-info">
+                <div><strong>WhatsApp:</strong> +54 9 11 7358-7842</div>
+                <div><strong>Email:</strong> dataanalystja@gmail.com</div>
+            </div>
+            <div style="text-align: right;">
+                raven-intelligence.surge.sh<br>
+                <strong>Raven Intelligence Company — 2026</strong>
+            </div>
+        </footer>
+    </div>
+
+</body>
+</html>

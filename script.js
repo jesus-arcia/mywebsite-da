@@ -6,7 +6,7 @@
 // CONFIGURACIÓN DE INTEGRACIÓN: Webhook de N8N (Automatización de Leads)
 // Instrucciones: Reemplazar la URL abajo por la de tu webhook de producción
 // ------------------------------------------------------------------
-const WEBHOOK_URL = 'https://hook.n8n.tu-dominio.com/webhook/raven-leads';
+const WEBHOOK_URL = 'https://alumnotres.app.n8n.cloud/webhook/raven-lead';
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -83,6 +83,15 @@ document.addEventListener('DOMContentLoaded', () => {
         leadForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             
+            // --- PROTECCIÓN DE SATURACIÓN (Cooldown) ---
+            const lastSubmission = localStorage.getItem('last_lead_submission');
+            const now = Date.now();
+            if (lastSubmission && (now - lastSubmission < 60000)) {
+                alert(`Por favor, espera un momento antes de enviar otra solicitud.`);
+                return;
+            }
+
+            
             // Cambiar estado del botón
             const originalBtnText = submitBtn.innerHTML;
             submitBtn.innerHTML = '<span>Enviando...</span>';
@@ -92,9 +101,11 @@ document.addEventListener('DOMContentLoaded', () => {
             // Recolectar datos
             const formData = new FormData(leadForm);
             const data = Object.fromEntries(formData.entries());
-            
-            // Recolectar checkboxes múltiples (servicios)
             data.services = formData.getAll('service');
+
+            // ID único para evitar repeticiones (Idempotencia)
+            data.submissionId = 'lead_' + Math.random().toString(36).substr(2, 9) + '_' + Date.now();
+            data.timestamp = new Date().toISOString();
 
             // --- INTEGRACIÓN DIRECTA A WHATSAPP (Trigger para Evolution API) ---
             const numeroDestino = '5491173587842'; 
@@ -111,29 +122,38 @@ document.addEventListener('DOMContentLoaded', () => {
                               `*Servicios de interés:*\n- ${serviciosTxt.replace(/,/g, '\n- ')}\n\n` +
                               `*Mensaje Adicional:*\n${data.message || 'Sin mensaje'}`;
             
-            // Codificar texto para la URL
-            const urlWhatsApp = `https://wa.me/${numeroDestino}?text=${encodeURIComponent(mensajeWA)}`;
-            
-            // Redirigir al cliente a su WhatsApp
-            window.open(urlWhatsApp, '_blank');
+            // --- ENVÍO AL WEBHOOK (n8n) y REDIRECCIÓN ---
+            const whatsappUrl = `https://wa.me/${numeroDestino}?text=${encodeURIComponent(mensajeWA)}`;
 
-            // Mostrar estado de éxito en el formulario
-            mostrarExito();
+            try {
+                // Enviamos al webhook
+                await fetch(WEBHOOK_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    keepalive: true, 
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
 
-            function mostrarExito() {
-                // Restaurar botón y ocultar form visualmente o solo mostrar el mensaje
+                localStorage.setItem('last_lead_submission', Date.now());
+
+                setTimeout(() => {
+                    window.open(whatsappUrl, '_blank');
+                
+                // Restaurar estado del formulario
                 submitBtn.innerHTML = originalBtnText;
                 submitBtn.disabled = false;
                 submitBtn.classList.add('btn-glow');
-                
                 leadForm.reset();
+                
+                // Opcional: Feedback visual al usuario
                 successMsg.classList.remove('hidden');
                 
                 // Ocultar el mensaje después de 10 segundos
                 setTimeout(() => {
                     successMsg.classList.add('hidden');
                 }, 10000);
-            }
+            }, 500);
         });
     }
 
