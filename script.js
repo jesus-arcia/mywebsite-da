@@ -171,4 +171,56 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    /* --- 6. INICIALIZAR ANIMACIONES GSAP --- */
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+        initAnimations();
+    }
+
 });
+
+// ==========================================================================
+// ANIMACIONES GSAP (SCROLL-TELLING)
+// ==========================================================================
+function initAnimations() {
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Animación del Hero (Entrada)
+    const heroTl = gsap.timeline();
+    heroTl.fromTo(".hero-badge", 
+        { y: -20, opacity: 0 }, 
+        { y: 0, opacity: 1, duration: 0.8, ease: "power3.out", delay: 0.2 }
+    )
+    .fromTo(".hero-title", 
+        { y: 30, opacity: 0 }, 
+        { y: 0, opacity: 1, duration: 1, ease: "power3.out" },
+        "-=0.5"
+    )
+    .fromTo(".hero-subtitle", 
+        { y: 20, opacity: 0 }, 
+        { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" }, 
+        "-=0.6"
+    )
+    .fromTo(".hero-actions, .hero-social", 
+        { y: 20, opacity: 0 }, 
+        { y: 0, opacity: 1, duration: 0.5, ease: "power2.out", stagger: 0.1 }, 
+        "-=0.4"
+    );
+
+    // Animaciones al hacer scroll (Reveal) para todas las clases .gsap-reveal
+    gsap.utils.toArray('.gsap-reveal').forEach(elem => {
+        gsap.fromTo(elem, 
+            { y: 40, opacity: 0 },
+            {
+                y: 0, 
+                opacity: 1, 
+                duration: 0.8, 
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: elem,
+                    start: "top 85%", // Cuando el top del elemento llegue al 85% de la ventana
+                    toggleActions: "play none none none"
+                }
+            }
+        );
+    });
+}
