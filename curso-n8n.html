@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso n8n & Inteligencia Artificial | RAVEN INTELLIGENCE</title>
+    <meta name="description" content="Aprende a automatizar tu empresa y crear Agentes de IA autónomos con n8n. Mentoría exclusiva por el Ing. Jesús Manuel Arcia.">
+
+    <!-- Fonts: Plus Jakarta Sans + Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Vinculamos tu archivo de estilos principal para mantener la identidad visual exacta -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <style>
+        /* Ajustes específicos para la Landing Page de Academia (si no existen en styles.css) */
+        .syllabus-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px; }
+        .module-card { padding: 30px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.1); background: rgba(20, 20, 25, 0.6); backdrop-filter: blur(10px); }
+        .module-number { font-size: 0.9rem; color: var(--primary-500, #4facfe); font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+        .module-title { font-size: 1.4rem; font-weight: 700; margin: 10px 0; color: #fff; }
+        .module-list { list-style: none; padding: 0; margin-top: 15px; color: #b3b3b3; line-height: 1.6; }
+        .module-list li { position: relative; padding-left: 20px; margin-bottom: 8px; }
+        .module-list li::before { content: '→'; position: absolute; left: 0; color: var(--primary-500, #4facfe); }
+        
+        .tutor-section { background: linear-gradient(180deg, rgba(10,10,12,1) 0%, rgba(20,25,40,1) 100%); padding: 80px 0; border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .tutor-container { display: flex; align-items: center; gap: 50px; flex-wrap: wrap; }
+        .tutor-text { flex: 1; min-width: 300px; }
+        .tutor-visual { flex: 1; text-align: center; }
+        
+        .price-card { max-width: 500px; margin: 50px auto; padding: 40px; text-align: center; border: 1px solid rgba(79, 172, 254, 0.3); box-shadow: 0 0 40px rgba(79, 172, 254, 0.1); }
+        .price-strike { text-decoration: line-through; color: #666; font-size: 1.2rem; }
+        .price-current { font-size: 3.5rem; font-weight: 800; color: #fff; margin: 10px 0; }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR (Modificado para Academia) -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo-link">
+                <img src="images/logo.png" alt="Raven Intelligence Company" class="nav-logo" onerror="this.outerHTML='<span class=\'logo-icon-fallback\'>R</span>'">
+            </a>
+            <a href="index.html" class="nav-brand-name">
+                <span class="brand-raven">RAVEN</span>
+                <span class="brand-intelligence">ACADEMY</span>
+            </a>
+            <div class="nav-links" id="nav-links">
+                <a href="#temario" class="nav-item">El Temario</a>
+                <a href="#tutor" class="nav-item">Tutor IA</a>
+                <a href="#instructor" class="nav-item">El Instructor</a>
+            </div>
+            <div class="nav-cta-wrapper">
+                <a href="#inscripcion" class="btn btn-outline nav-cta">Lista de Espera</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="hero">
+        <div class="hero-container" style="display: flex; align-items: center; justify-content: space-between; gap: 40px; max-width: 1200px; margin: 0 auto; flex-wrap: wrap;">
+            
+            <!-- Columna Izquierda: Copywriting -->
+            <div class="hero-content" style="flex: 1; min-width: 300px; text-align: left;">
+                <div class="hero-badge" style="margin-bottom: 20px;">
+                    Programa de Formación Ejecutiva
+                </div>
+                <h1 class="hero-title">Domina la Automatización y la <span class="text-gradient">Inteligencia Artificial</span> con n8n</h1>
+                <p class="hero-subtitle">Libera el verdadero potencial de tus operaciones sin límites de ejecución ni costos restrictivos. Aprende a construir ecosistemas escalables, arquitecturas seguras y Agentes de IA autónomos que trabajen 24/7 para tu empresa.</p>
+                <div class="hero-actions">
+                    <a href="#inscripcion" class="btn btn-primary btn-glow">Unirse a la Beta Cerrada</a>
+                    <a href="#temario" class="btn btn-outline">Ver Temario Completo</a>
+                </div>
+            </div>
+
+            <!-- Columna Derecha: Ecosistema Visual -->
+            <div class="hero-visual" style="flex: 1; min-width: 300px; text-align: center; position: relative;">
+                <!-- Efecto de flotación para darle vida a la arquitectura de datos -->
+                <img src="images/raven_n8n_hero_wings_open.jpg" alt="Raven Intelligence n8n Ecosistema" class="float-anim" style="max-width: 120%; margin-left: -10%; filter: contrast(1.4) brightness(0.8) drop-shadow(0 20px 40px rgba(212, 255, 0, 0.15)); mix-blend-mode: screen; -webkit-mask-image: radial-gradient(ellipse at center, black 50%, transparent 75%); mask-image: radial-gradient(ellipse at center, black 50%, transparent 75%);">
+            </div>
+
+        </div>
+    </section>
+
+    <!-- EL PROBLEMA / PROPUESTA -->
+    <section class="services" style="padding-top: 40px;">
+        <div class="container text-center gsap-reveal">
+            <h2 class="section-title">El modelo tradicional de automatización está roto.</h2>
+            <p class="section-subtitle" style="max-width: 700px; margin: 0 auto 40px auto; color: #a0a0a0;">Pagar por cada "tarea" ejecutada limita tu crecimiento. Aislar tu base de datos de tu automatización genera vulnerabilidades. Es momento de evolucionar a infraestructuras Open-Source seguras (BFF) gestionadas por IA.</p>
+        </div>
+    </section>
+
+    <!-- TEMARIO DEL CURSO -->
+    <section class="projects" id="temario">
+        <div class="container">
+            <div class="section-header text-center gsap-reveal">
+                <h2 class="section-title">Una Arquitectura de Aprendizaje Implacable</h2>
+                <p class="section-subtitle">Desde los fundamentos del procesamiento de datos hasta el despliegue de Agentes RAG.</p>
+            </div>
+
+            <div class="syllabus-grid gsap-reveal">
+                <!-- Módulo 1 -->
+                <div class="module-card">
+                    <div class="module-number">Módulo 1</div>
+                    <h3 class="module-title">Fundamentos Core (Essentials)</h3>
+                    <p style="color: #888; font-size: 0.9rem;">Domina la manipulación de datos antes de automatizar.</p>
+                    <ul class="module-list">
+                        <li>El lienzo de n8n y orden de ejecución.</li>
+                        <li>Resolución profunda de variables con expresiones `$json`.</li>
+                        <li>Manejo de Datos Binarios (PDFs, Imágenes).</li>
+                        <li>Creación de tu primer Pipeline de Ventas.</li>
+                    </ul>
+                </div>
+
+                <!-- Módulo 2 -->
+                <div class="module-card">
+                    <div class="module-number">Módulo 2</div>
+                    <h3 class="module-title">APIs, Seguridad y Arquitectura</h3>
+                    <p style="color: #888; font-size: 0.9rem;">Sistemas a prueba de fallos y listos para producción.</p>
+                    <ul class="module-list">
+                        <li>Nodos de Control de Flujo y Sub-workflows.</li>
+                        <li>Integración de Webhooks y APIs externas.</li>
+                        <li>Manejo proactivo/reactivo de errores.</li>
+                        <li>Seguridad Corporativa: Arquitectura BFF (Node.js/Express) para proteger tus bases de datos.</li>
+                    </ul>
+                </div>
+
+                <!-- Módulo 3 -->
+                <div class="module-card">
+                    <div class="module-number">Módulo 3</div>
+                    <h3 class="module-title">Inteligencia Artificial y Agentes</h3>
+                    <p style="color: #888; font-size: 0.9rem;">El nivel experto. Tus empleados digitales.</p>
+                    <ul class="module-list">
+                        <li>Ingeniería de Prompts en flujos automatizados.</li>
+                        <li>Nodos Regulares (Chains) vs Agentes de IA.</li>
+                        <li>Manejo de Memoria y Tools dinámicos.</li>
+                        <li>Optimización de Tokens y pruebas de estrés.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TUTOR IA RAGNAR AARON -->
+    <section class="tutor-section" id="tutor">
+        <div class="container tutor-container gsap-reveal">
+            <div class="tutor-text">
+                <h2 class="section-title">Conoce a tu Tutor Personal 24/7: <span class="text-gradient">Ragnar Aaron</span></h2>
+                <p style="color: #b3b3b3; font-size: 1.1rem; line-height: 1.8; margin-top: 20px;">
+                    ¿Te atascaste con un error en un nodo a las 3 de la mañana? No te preocupes. Como alumno de Raven Intelligence, tendrás acceso ilimitado a nuestro Agente de IA propietario.
+                </p>
+                <p style="color: #b3b3b3; font-size: 1.1rem; line-height: 1.8; margin-top: 15px;">
+                    Ragnar está entrenado (mediante tecnología RAG) con toda la documentación oficial de n8n y el temario exacto del curso. Él no hará el trabajo por ti; revisará tus errores, te explicará la lógica y te guiará estratégicamente hasta que tu flujo funcione perfectamente.
+                </p>
+                <div style="margin-top: 30px;">
+                    <span class="skill-tag">Asistencia Inmediata</span>
+                    <span class="skill-tag">Corrección de Errores</span>
+                    <span class="skill-tag">Respuestas Contextuales</span>
+                </div>
+            </div>
+            <div class="tutor-visual">
+                <!-- Imagen del cuervo robótico (Ragnar) -->
+                <img src="images/ragnar_transparent.png" alt="Ragnar Aaron Tutor IA" style="max-width: 100%; filter: drop-shadow(0 20px 30px rgba(0, 255, 100, 0.15));" onerror="this.style.display='none'">
+            </div>
+        </div>
+    </section>
+
+    <!-- INSTRUCTOR SECTION -->
+    <section class="about" id="instructor" style="padding-top: 60px;">
+        <div class="container gsap-reveal">
+            <h2 class="section-title text-center" style="margin-bottom: 50px;">Tu Instructor Principal</h2>
+            
+            <div style="display: flex; align-items: center; justify-content: center; gap: 40px; max-width: 800px; margin: 0 auto; flex-wrap: wrap;">
+                
+                <!-- Columna Foto -->
+                <div style="flex-shrink: 0; text-align: center;">
+                    <img src="images/profile.jpg" alt="Ing. Jesús Manuel Arcia" style="width: 200px; height: 200px; border-radius: 50%; border: 3px solid var(--primary-500); box-shadow: 0 0 30px rgba(212, 255, 0, 0.2);" onerror="this.src='https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=400'">
+                </div>
+
+                <!-- Columna Texto -->
+                <div style="flex: 1; min-width: 300px; text-align: left;">
+                    <h3 style="color: #fff; font-size: 1.8rem; margin-bottom: 5px;">Ing. Jesús Manuel Arcia</h3>
+                    <p class="text-gradient" style="font-weight: 600; margin-bottom: 14px; font-size: 1.1rem;">Fundador de Raven Academy · <a href="https://credentials.learn.n8n.io/credentials/552f131852e6499ea47bfb6ff86b684a/" target="_blank" rel="noopener noreferrer" style="color: var(--primary-500); text-decoration: underline;">n8n Certified Professional</a></p>
+                    <p style="color: #b3b3b3; line-height: 1.7; font-size: 1.05rem;">
+                        Ingeniero con formación militar, más de 20 años de experiencia táctica y <strong>Certificación Profesional Oficial otorgada por n8n (learn.n8n.io)</strong>. No enseño teoría vacía; te enseñaré las mismas arquitecturas robustas y flujos de automatización avalados por los creadores de la herramienta que usamos en Raven Intelligence para escalar empresas en entornos de alta presión.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- PRE-VENTA / CTA FINAL -->
+    <section class="final-cta text-center" id="inscripcion" style="padding-top: 20px;">
+        <div class="container relative z-10">
+            <div class="price-card glass-panel gsap-reveal">
+                <h2 style="color: #fff; font-size: 1.8rem; margin-bottom: 10px;">Acceso Fase Beta</h2>
+                <p style="color: #b3b3b3; margin-bottom: 20px;">Plazas limitadas para el grupo de prueba fundacional.</p>
+                <div class="price-strike">$299 USD</div>
+                <div class="price-current">$00.00 <span style="font-size: 1rem; color: #888; font-weight: normal;">/ Invitación Exclusiva</span></div>
+                
+                <ul style="list-style: none; padding: 0; margin: 30px 0; text-align: left; color: #fff;">
+                    <li style="margin-bottom: 10px;">— 3 Módulos en Video de Alta Calidad</li>
+                    <li style="margin-bottom: 10px;">— Guías de Arquitectura BFF & Seguridad</li>
+                    <li style="margin-bottom: 10px;">— Flujos JSON Descargables</li>
+                    <li style="margin-bottom: 10px;">— Acceso al Tutor IA (Ragnar Aaron)</li>
+                </ul>
+
+                <a href="https://tally.so/r/tu-enlace-oculto" target="_blank" class="btn btn-primary btn-glow btn-lg w-100">Solicitar Invitación a la Beta</a>
+                <p style="color: #666; font-size: 0.8rem; margin-top: 15px;">Solo aceptaremos a 10 personas para garantizar la calidad del soporte.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer" style="padding: 60px 0 30px 0; background: #0a0a0c; border-top: 1px solid rgba(255,255,255,0.05);">
+        <div class="container">
+            <div class="footer-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,0.05); margin-bottom: 20px;">
+                
+                <!-- Brand / Logo -->
+                <div class="footer-brand">
+                    <img src="images/logo.png" alt="Raven Academy" style="width: 45px; margin-bottom: 15px;" onerror="this.style.display='none'">
+                    <h4 style="color: #fff; font-size: 1.2rem; margin-bottom: 10px;">RAVEN <span class="text-gradient">ACADEMY</span></h4>
+                    <p style="color: #b3b3b3; font-size: 0.9rem; line-height: 1.6;">Formación Ejecutiva en Automatización de Procesos e Inteligencia Artificial.</p>
+                </div>
+
+                <!-- Enlaces Rápidos -->
+                <div class="footer-links">
+                    <h4 style="color: #fff; margin-bottom: 15px; font-size: 1.1rem;">Navegación</h4>
+                    <ul style="list-style: none; padding: 0; line-height: 2.2;">
+                        <li><a href="#temario" style="color: #888; text-decoration: none; transition: color 0.3s;">El Temario</a></li>
+                        <li><a href="#tutor" style="color: #888; text-decoration: none; transition: color 0.3s;">Conoce a Ragnar IA</a></li>
+                        <li><a href="#inscripcion" style="color: #888; text-decoration: none; transition: color 0.3s;">Lista de Espera Beta</a></li>
+                        <li><a href="index.html" style="color: var(--primary-500); text-decoration: none; font-weight: 600;">← Volver a Raven Intelligence Company</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contacto -->
+                <div class="footer-links">
+                    <h4 style="color: #fff; margin-bottom: 15px; font-size: 1.1rem;">Soporte al Alumno</h4>
+                    <ul style="list-style: none; padding: 0; line-height: 2.2;">
+                        <li><span style="color: #555;">WA Soporte:</span> <a href="https://wa.me/5491173587842" style="color: #888; text-decoration: none;">+54 9 11 7358 7842</a></li>
+                        <li><span style="color: #555;">WA Ragnar AI:</span> <a href="https://wa.me/5491173721905" style="color: #888; text-decoration: none;">+54 9 11 7372 1905</a></li>
+                        <li><span style="color: #555;">Ubicación:</span> <span style="color: #888;">GABA Pilar, Buenos Aires</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="footer-bottom" style="text-align: center; padding-top: 10px;">
+                <p style="color: #555; font-size: 0.85rem;">&copy; 2026 RAVEN INTELLIGENCE ACADEMY. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts de animación -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script>
+        // Animaciones simples para la maqueta
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.utils.toArray('.gsap-reveal').forEach(function(elem) {
+            gsap.fromTo(elem, 
+                { y: 50, opacity: 0 },
+                { y: 0, opacity: 1, duration: 1, ease: "power3.out", scrollTrigger: { trigger: elem, start: "top 85%" } }
+            );
+        });
+    </script>
+</body>
+</html>

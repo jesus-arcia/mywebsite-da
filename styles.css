@@ -653,7 +653,7 @@ img {
 
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 32px;
 }
 
@@ -730,6 +730,16 @@ img {
     border-radius: 12px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     mix-blend-mode: normal;
+}
+
+.recimax-logo {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 14px 28px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    mix-blend-mode: normal;
+    max-width: 65%;
+    max-height: 65%;
 }
 
 .project-content {
